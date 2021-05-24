@@ -1,12 +1,12 @@
-const { execFile,exec } = require('child_process');
+const { execFile, exec } = require('child_process');
 var fs = require('fs');
 
 module.exports = {
     create,
     build,
-    run
+    run,
+    checkAnswer
 };
-
 async function create(sourceCode, fileName, callback) {
     fs.writeFile(`./testCode/${fileName}.cpp`, `${sourceCode}`, function (err) {
         if (err) {
@@ -34,21 +34,56 @@ async function build(filePathCpp, callback) {
 async function run(filePathExe, input) {
     return new Promise(async function (resolve, reject) {
         try {
-            var child = await execFile(filePathExe, (err, stdout, stderr) => {
-                    console.log('run smoothly')
+            var child = await execFile(filePathExe, { timeout: 1000 }, (err, stdout, stderr) => {
+                if (err) {
+                    console.log(err);
+                    result = 'failed';
+                    resolve({
+                        result
+                    });
+
+                }
+                else if (stderr) {
+                    console.log(stderr);
+                    result = 'failed';
+                    resolve({
+                        result
+                    });
+                }
+                else {
                     result = stdout;
                     //console.log(result);
                     resolve({
                         result
                     });
+
+                }
             });
             child.stdin.setEncoding('utf-8');
             child.stdin.write(input);
+            child.stdin.end();
         }
         catch (e) {
             console.log(e);
         }
     })
+}
+function checkAnswer(sourceOutput, testCaseOutput) {
+    var trimedSourceOutput = sourceOutput.trimEnd().split(/\r?\n/);
+    var trimedTestCaseOutput = testCaseOutput.trimEnd().split(/\r?\n/);
+    //cut back cut front
+    //console.log(trimedSourceOutput + ' == ' + trimedSourceOutput)
+    //console.log(trimedSourceOutput == trimedTestCaseOutput)
+    for(var index = 0 ; index < trimedSourceOutput.length ; index++){
+           // console.log(trimedSourceOutput[index])
+           // console.log(trimedTestCaseOutput[index])
+        if (trimedSourceOutput[index] != trimedTestCaseOutput[index]) {
+            return false;
+        }
+
+    }
+    return true;
+
 }
 // async function go() {
 //     await
