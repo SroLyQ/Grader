@@ -5,7 +5,8 @@ module.exports = {
     create,
     build,
     run,
-    checkAnswer
+    checkAnswer,
+
 };
 async function create(sourceCode, fileName, callback) {
     fs.writeFile(`./testCode/${fileName}.cpp`, `${sourceCode}`, function (err) {
@@ -37,11 +38,12 @@ async function run(filePathExe, input) {
             var child = await execFile(filePathExe, { timeout: 1000 }, (err, stdout, stderr) => {
                 if (err) {
                     console.log(err);
-                    result = 'failed';
-                    resolve({
-                        result
-                    });
-
+                    if (err.signal == 'SIGTERM') {
+                        result = 'T';
+                        resolve({
+                            result
+                        });
+                    }
                 }
                 else if (stderr) {
                     console.log(stderr);
@@ -74,9 +76,9 @@ function checkAnswer(sourceOutput, testCaseOutput) {
     //cut back cut front
     //console.log(trimedSourceOutput + ' == ' + trimedSourceOutput)
     //console.log(trimedSourceOutput == trimedTestCaseOutput)
-    for(var index = 0 ; index < trimedSourceOutput.length ; index++){
-           // console.log(trimedSourceOutput[index])
-           // console.log(trimedTestCaseOutput[index])
+    for (var index = 0; index < trimedSourceOutput.length; index++) {
+        // console.log(trimedSourceOutput[index])
+        // console.log(trimedTestCaseOutput[index])
         if (trimedSourceOutput[index] != trimedTestCaseOutput[index]) {
             return false;
         }

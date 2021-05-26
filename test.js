@@ -1,5 +1,5 @@
 const {
-    go
+    checkResult
 } = require('./run.js');
 
 var code1 = `#include <stdio.h> 
@@ -47,7 +47,7 @@ var code3 = `
                    else{
                        printf("0 ");
                    }
-               }
+                }
                 return 0;
             }
 `
@@ -56,10 +56,26 @@ var testDummy3 = {
     output: `1 0 1 0 1 0$.$1 0 `,
     sourceCode: code3
 }
+var code4 = `
+#include <stdio.h> 
+int main(){
+    char a;
+    scanf(" %c",&a);
+    while(1);
+    printf("%c",a);
+    return 0;
+}
+`
 
-async function tester(){
-    console.log(await go(testDummy1));
-    console.log(await go(testDummy2));
-    console.log(await go(testDummy3));
+var testDummy4 = {
+    input: `6$.$2`,
+    output: `6$.$2 `,
+    sourceCode: code4
+}
+async function tester() {
+    console.log(await checkResult(testDummy1));
+    console.log(await checkResult(testDummy2));
+    console.log(await checkResult(testDummy3));
+    console.log(await checkResult(testDummy4));
 }
 tester();

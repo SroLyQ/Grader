@@ -5,9 +5,9 @@ const {
     checkAnswer
 } = require('./Grader.js');
 module.exports = {
-    go
+    checkResult
 };
-async function go(testDummy) {
+async function checkResult(testDummy) {
     var resultTest = '';
     var index = 0;
     //console.log(testDummy);
@@ -37,20 +37,21 @@ async function go(testDummy) {
                     console.log("Build Complete");
                     let runInput = testDummy.input.split('$.$');
                     let runOutput = testDummy.output.split('$.$');
-                    var result_ = [];
+                    var inputMap = [];
                     console.log(runInput);
                     console.log(runOutput);
-                    const processXing = runInput.map(async (inputX, idx) => {
-                        result_[idx] = await run(filePathExe, inputX);
+                    const mapInput = runInput.map(async (inputX, idx) => {
+                        inputMap[idx] = await run(filePathExe, inputX);
                         //console.log(inputX)
                         //console.log(result_[idx].result);
                     });
-                    await Promise.all(processXing);
+                    await Promise.all(mapInput);
                     runOutput.forEach(runTest => {
-                        if (checkAnswer(result_[index].result, runTest)) {
+                        if (checkAnswer(inputMap[index].result, runTest)) {
                             resultTest += 'P'
                         } else {
-                            resultTest += '-'
+                            if (inputMap[index].result == 'T') resultTest += 'T'
+                            else resultTest += '-'
                         }
                         index++;
                     });
