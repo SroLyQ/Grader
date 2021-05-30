@@ -11,8 +11,8 @@ var code1 = `#include <stdio.h>
             }
     `
 var testDummy1 = {
-    input: `a$.$e$.$c`,
-    output: `a$.$e$.$c`,
+    input: `a$.$e$.$c$.$d$.$d$.$d$.$d$.$d$.$d$.$d`,
+    output: `a$.$e$.$c$.$d$.$d$.$d$.$d$.$d$.$d$.$d`,
     sourceCode: code1
 }
 
