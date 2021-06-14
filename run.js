@@ -18,7 +18,7 @@ async function checkResult(testDummy) {
                 if (err) {
                     console.log(err.message + " go create failed");
                     //created error
-                    resultTest = 'E'
+                    resultTest = 'C'
                     resolve({
                         resultTest
                     });
@@ -38,8 +38,8 @@ async function checkResult(testDummy) {
                     let runInput = testDummy.input.split('$.$');
                     let runOutput = testDummy.output.split('$.$');
                     var inputMap = [];
-                    console.log(runInput);
-                    console.log(runOutput);
+                    //console.log(runInput);
+                    //console.log(runOutput);
                     const mapInput = runInput.map(async (inputX, idx) => {
                         inputMap[idx] = await run(filePathExe, inputX);
                         //console.log(inputX)
@@ -50,12 +50,13 @@ async function checkResult(testDummy) {
                         if (checkAnswer(inputMap[index].result, runTest)) {
                             resultTest += 'P'
                         } else {
-                            if (inputMap[index].result == 'T') resultTest += 'T'
+                            if (inputMap[index].result == 'Timeout') resultTest += 'T'
+                            else if(inputMap[index].result == 'Out of Buffer') resultTest += 'O';
                             else resultTest += '-'
                         }
                         index++;
                     });
-                    //console.log(resultTest);
+                    // console.log(resultTest);
                     resolve({
                         resultTest
                     })

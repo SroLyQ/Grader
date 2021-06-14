@@ -35,11 +35,11 @@ async function build(filePathCpp, callback) {
 async function run(filePathExe, input) {
     return new Promise(async function (resolve, reject) {
         try {
-            var child = await execFile(filePathExe, { timeout: 1000 }, (err, stdout, stderr) => {
+            var child = await execFile(filePathExe, { timeout: 1000,maxBuffer:65536 }, (err, stdout, stderr) => {
                 if (err) {
                     console.log(err);
                     if (err.signal == 'SIGTERM') {
-                        result = 'T';
+                        result = 'Timeout';
                         resolve({
                             result
                         });
@@ -71,15 +71,19 @@ async function run(filePathExe, input) {
     })
 }
 function checkAnswer(sourceOutput, testCaseOutput) {
+
     var trimedSourceOutput = sourceOutput.trimEnd().split(/\r?\n/);
     var trimedTestCaseOutput = testCaseOutput.trimEnd().split(/\r?\n/);
     //cut back cut front
-    //console.log(trimedSourceOutput + ' == ' + trimedSourceOutput)
-    //console.log(trimedSourceOutput == trimedTestCaseOutput)
+    //console.log(trimedSourceOutput + ' == ' + trimedTestCaseOutput)
+    //console.log(trimedTestCaseOutput == trimedSourceOutput)
     for (var index = 0; index < trimedSourceOutput.length; index++) {
-        // console.log(trimedSourceOutput[index])
-        // console.log(trimedTestCaseOutput[index])
-        if (trimedSourceOutput[index] != trimedTestCaseOutput[index]) {
+        // console.log(trimedSourceOutput[index].trimEnd())
+        //  console.log('--------------------')
+        // console.log(trimedTestCaseOutput[index].trimEnd())
+        // console.log('====================')
+        //console.log(trimedTestCaseOutput[index].trimEnd())
+        if (trimedSourceOutput[index].trimEnd() != trimedTestCaseOutput[index].trimEnd()) {
             return false;
         }
 
@@ -87,27 +91,3 @@ function checkAnswer(sourceOutput, testCaseOutput) {
     return true;
 
 }
-// async function go() {
-//     await
-//         create('testFirst', async function (err, filePathCpp) {
-//             if (err) {
-//                 console.log(err.message + " go create failed");
-//                 return;
-//             }
-//             console.log("Create Complete")
-//             console.log(filePathCpp);
-//             await build(filePathCpp, async function (err, filePathExe) {
-//                 if (err) {
-//                     console.log(err.message + " go build failed");
-//                     return;
-//                 }
-//                 console.log(filePathExe);
-//                 console.log("Build Complete");
-//                 var ans = await run(filePathExe);
-//                 console.log(ans);
-//             })
-//         })
-// }
-// (async () => {
-//     await go();
-// })();
