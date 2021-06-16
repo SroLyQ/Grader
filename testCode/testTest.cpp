@@ -1,9 +1,1 @@
-
-#include<iostream>
-using namespace std;
-int main() {
-    string input;
-    cin >> input;
-    cout << input;
-    return 0;
-}
+bits/stdc++.h is a banned library

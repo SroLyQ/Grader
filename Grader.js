@@ -8,14 +8,17 @@ module.exports = {
     checkAnswer,
 
 };
+const checkForBannedLib = require('./checkBanLib')
 async function create(sourceCode, fileName, callback) {
-    fs.writeFile(`./testCode/${fileName}.cpp`, `${sourceCode}`, function (err) {
+    let checkedSource = checkForBannedLib(sourceCode); 
+    if(checkedSource[0]==-1){callback(checkedSource[1],null)}
+    fs.writeFile(`./testCode/${fileName}.cpp`, `${checkedSource[1]}`, function (err) {
         if (err) {
             console.log(err.message + ' create failed');
             callback(err, null)
             return 0;
         }
-        callback(err, `./testCode/${fileName}.cpp`)
+        callback(null, `./testCode/${fileName}.cpp`)
     });
 }
 async function build(filePathCpp, callback) {

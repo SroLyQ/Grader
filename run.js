@@ -13,17 +13,21 @@ async function checkResult(testDummy) {
     //console.log(testDummy);
     // console.log(testDummy.sourceCode);
     return new Promise(async function (resolve, reject) {
+        try{
         await
             create(testDummy.sourceCode, 'testTest', async function (err, filePathCpp) {
                 if (err) {
-                    console.log(err.message + " go create failed");
-                    //created error
                     resultTest = 'C'
+                    console.log(err + " go create failed");
+                    if(err.toString().includes(`is a banned library`)){
+                        resultTest='L'
+                    }
+                    //created error
                     resolve({
                         resultTest
                     });
+                    return;
                 }
-                console.log("Create Complete")
                 console.log(filePathCpp);
                 await build(filePathCpp, async function (err, filePathExe) {
                     if (err) {
@@ -32,6 +36,7 @@ async function checkResult(testDummy) {
                         resolve({
                             resultTest
                         });
+                        return;
                     }
                     //console.log(filePathExe);
                     console.log("Build Complete");
@@ -63,8 +68,11 @@ async function checkResult(testDummy) {
                 })
             })
 
-
-        return;
-
+        }
+        catch(e){
+            resolve({
+                'resultTest' : 'Y'
+            })
+        }
     })
 }
