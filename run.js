@@ -33,6 +33,9 @@ async function checkResult(testDummy) {
                     if (err) {
                         console.log(err.message + " go build failed");
                         resultTest = 'B'
+                        if(err.toString().includes('_is_a_banned_function')){
+                            resultTest='F';
+                        }
                         resolve({
                             resultTest
                         });
@@ -56,7 +59,7 @@ async function checkResult(testDummy) {
                             resultTest += 'P'
                         } else {
                             if (inputMap[index].result == 'Timeout') resultTest += 'T'
-                            else if(inputMap[index].result == 'Out of Buffer') resultTest += 'O';
+                            else if(inputMap[index].result == 'Out_of_buffer') resultTest += 'O';
                             else resultTest += '-'
                         }
                         index++;
@@ -70,9 +73,11 @@ async function checkResult(testDummy) {
 
         }
         catch(e){
+            //console.log(e);
             resolve({
                 'resultTest' : 'Y'
             })
+
         }
     })
 }

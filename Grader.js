@@ -38,14 +38,20 @@ async function build(filePathCpp, callback) {
 async function run(filePathExe, input) {
     return new Promise(async function (resolve, reject) {
         try {
-            var child = await execFile(filePathExe, { timeout: 1000,maxBuffer:65536 }, (err, stdout, stderr) => {
+            var child = await execFile(filePathExe, {timeout: 1000, maxBuffer:64 * 64 }, (err, stdout, stderr) => {
                 if (err) {
                     console.log(err);
-                    if (err.signal == 'SIGTERM') {
+                    if (err.signal && err.signal == 'SIGTERM') {
                         result = 'Timeout';
                         resolve({
                             result
                         });
+                    }
+                    else if(err.code && err.code == 'ERR_CHILD_PROCESS_STDIO_MAXBUFFER'){
+                        result = 'Out_of_buffer';
+                        resolve({
+                            result
+                        })
                     }
                 }
                 else if (stderr) {
@@ -64,9 +70,13 @@ async function run(filePathExe, input) {
 
                 }
             });
-            child.stdin.setEncoding('utf-8');
-            child.stdin.write(input);
-            child.stdin.end();
+                child.stdin.pipe(child.stdin);
+                child.stdin.setEncoding('utf-8');
+                child.stdin.write(input);
+                child.stdin.end();
+                child.on('close',(code)=>{
+                    console.log(`child process exited with code ${code}`)
+                })
         }
         catch (e) {
             console.log(e);
@@ -77,15 +87,7 @@ function checkAnswer(sourceOutput, testCaseOutput) {
 
     var trimedSourceOutput = sourceOutput.trimEnd().split(/\r?\n/);
     var trimedTestCaseOutput = testCaseOutput.trimEnd().split(/\r?\n/);
-    //cut back cut front
-    //console.log(trimedSourceOutput + ' == ' + trimedTestCaseOutput)
-    //console.log(trimedTestCaseOutput == trimedSourceOutput)
     for (var index = 0; index < trimedSourceOutput.length; index++) {
-        // console.log(trimedSourceOutput[index].trimEnd())
-        //  console.log('--------------------')
-        // console.log(trimedTestCaseOutput[index].trimEnd())
-        // console.log('====================')
-        //console.log(trimedTestCaseOutput[index].trimEnd())
         if (trimedSourceOutput[index].trimEnd() != trimedTestCaseOutput[index].trimEnd()) {
             return false;
         }

@@ -64,6 +64,7 @@ var testDummy3 = {
     output: `1 0 1 0 1 0$.$1 0 `,
     sourceCode: code3
 }
+//timeout testDummy
 var code4 = `
 #include <stdio.h> 
 int main(){
@@ -82,78 +83,29 @@ var testDummy4 = {
 }
 
 var code5 = `
-#include<stdio.h>
-int main()
-{
-    int n,m,x,y,i,j,ii,jj,iii,jjj;
-    char a[100][100];
-    scanf("%d %d",&n,&m);
-    for(i=0; i<n; i++)
-    {
-        for(j=0; j<m; j++)
-        {
-            scanf(" %c",&a[i][j]);
-        }
+#include <stdio.h> 
+int main(){
+    char a;
+    int pp=99;
+    int b[100000],c[100000],d[100000],h[100000];
+    scanf(" %c",&a);
+    while(pp--){
+        printf("a;lkjshdfoiughy98qy23098674h190862h39841569-28365-19086724-9018y3-oeidhfo1iy-938n7e89017-39086eyr-908gyo1piwhroify-198ew6jnfmh9861-098e6h-90gn8y1-9ieyrhu1-tg9j8167-23498561082364078g108746509186204987-09v8y129084yfj109382467509186209jf09186h9083609156098612098630958idk9028h6n39586g1b-982639-816-ih1touihyi1uh64n5789f0189u3heiuyr0876098647-12984jm-9586b981nyh-983em8ut98oyuo2iy-9438567-8u3jr0-u123-171430957-09jfhn1-098347hn-561g9037yureiokh3t-189634-598ygn198364hn-51g\\n");
     }
-    scanf("%d %d",&x,&y);
-    ii=y,jj=x;
-    while(ii>=0 && ii<n && jj>=0 && jj<m)
-    {
-        iii=ii,jjj=jj;
-        if(a[ii][jj]=='N')
-        {
-            ii--;
-        }
-        else if(a[ii][jj]=='S')
-        {
-            ii++;
-        }
-        else if(a[ii][jj]=='E')
-        {
-            jj++;
-        }
-        else if(a[ii][jj]=='W')
-        {
-            jj--;
-        }
-        else if(a[ii][jj]=='P')
-        {
-            printf("NO");
-            return 0;
-        }
-        a[iii][jjj]='P';
-    }
-    printf("YES\\n");
-
     return 0;
 }
 `
 
 var testDummy5 = {
-    input: `4 4 N W E S 
-    W W N S 
-     N S W E 
-     W E N S 
-     2 3$.$4 4 N W E S W W N S N S W E W S N S 2 3$.$10 10
-    S E W W N E N E W W
-    W W N E E E W S E N
-    S N W W S N S N W E
-    W E N N E W W W E N
-    S N W W E S N N W S
-    N E E N W E E N S S
-    S W S N W W E N W N
-    E E W W S S N N E W
-    S W S W S W N E N N
-    S N N N E N N N W N
-    3 4`,
-    output: `NO$.$YES$.$YES`,
+    input: `6$.$2$.$2$.$2$.$2$.$2$.$2$.$2$.$2$.$2`,
+    output: `6$.$2$.$2$.$2$.$2$.$2$.$2$.$2$.$2$.$2 `,
     sourceCode: code5
 }
 var code6=`#include <bits/stdc++.h>
 using namespace std;
 int main(){
     int a;
-    scanf("%d",%a);
+    scanf("%d",&a);
     printf("%d\\n",a);
     return 0;
 }
@@ -169,8 +121,8 @@ async function tester() {
     //console.log(await checkResult(testDummy2));
     //console.log(await checkResult(testDummy3));
     //console.log(await checkResult(testDummy4));
-    //console.log(await checkResult(testDummy5));
+    console.log(await checkResult(testDummy5));
     //console.log(await checkResult(testDummy6));
-    console.log(await checkResult(testDummy6))
+    //console.log(await checkResult(testDummy6))
 }
 tester();

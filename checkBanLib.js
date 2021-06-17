@@ -10,19 +10,19 @@ module.exports = function checkForBannedLib(sourceCode) {
             return [-1, `${lib} is a banned library`];
         }
     };
-    return[1,sourceCode];
-    // try {
-    //     if (sourceCode.lastIndexOf(`#include`) == -1) {
-    //         return [1, `#include\"banned.h\"\r\n` + sourceCode];
-    //     }
-    //     let headerString = sourceCode.substr((sourceCode.lastIndexOf(`#include`)));
-    //     headerString+=`#include \"banned.h\" \r\n`
-    //     let intmainString= newString.substr(newString.indexOf(`>`) + 1);
-    //     let newSourceCode = headerString + intmainString
-    //     console.log(newSourceCode);
-    //     return [1, newSourceCode];
-    // } catch (e) {
-    //     //console.log(e);
-    //     return [1, `#include\"banned.h\"\r\n` + code];
-    // }
+    //return [1, sourceCode];
+    try {
+        if (sourceCode.lastIndexOf(`#include`) == -1) {
+            return [1, `#include\"banned.h\"\r\n` + sourceCode];
+        }
+        let headerString = sourceCode.substr((sourceCode.lastIndexOf(`#include`)));
+        let intmainString= headerString.substr(headerString.indexOf(`>`) + 1);
+        //console.log(intmainString)
+        let newSourceCode = sourceCode.substr(0,sourceCode.lastIndexOf(intmainString))+ `\r\n#include \"banned.h\" \r\n` + intmainString
+        //console.log(newSourceCode);
+        return [1, newSourceCode];
+    } catch (e) {
+        console.log(e);
+        return [1, `#include\"banned.h\"\r\n` + sourceCode];
+    }
 };
