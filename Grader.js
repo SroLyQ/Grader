@@ -65,7 +65,7 @@ async function run(filePathExe, input) {
                     result = stdout;
                     //console.log(result);
                     resolve({
-                        result
+                        result,
                     });
 
                 }

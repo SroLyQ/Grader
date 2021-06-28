@@ -95,7 +95,7 @@ int main(){
     return 0;
 }
 `
-
+//Out of buffer
 var testDummy5 = {
     input: `6$.$2$.$2$.$2$.$2$.$2$.$2$.$2$.$2$.$2`,
     output: `6$.$2$.$2$.$2$.$2$.$2$.$2$.$2$.$2$.$2 `,
@@ -117,11 +117,11 @@ var testDummy6 = {
 }
 async function tester() {
     
-    //console.log(await checkResult(testDummy1));
+    // console.log(await checkResult(testDummy1));
     //console.log(await checkResult(testDummy2));
     //console.log(await checkResult(testDummy3));
     //console.log(await checkResult(testDummy4));
-    console.log(await checkResult(testDummy5));
+    //console.log(await checkResult(testDummy5));
     //console.log(await checkResult(testDummy6));
     //console.log(await checkResult(testDummy6))
 }

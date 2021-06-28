@@ -1,14 +1,1 @@
-
-#include <stdio.h>
-#include "banned.h" 
- 
-int main(){
-    char a;
-    int pp=99;
-    int b[100000],c[100000],d[100000],h[100000];
-    scanf(" %c",&a);
-    while(pp--){
-        printf("a;lkjshdfoiughy98qy23098674h190862h39841569-28365-19086724-9018y3-oeidhfo1iy-938n7e89017-39086eyr-908gyo1piwhroify-198ew6jnfmh9861-098e6h-90gn8y1-9ieyrhu1-tg9j8167-23498561082364078g108746509186204987-09v8y129084yfj109382467509186209jf09186h9083609156098612098630958idk9028h6n39586g1b-982639-816-ih1touihyi1uh64n5789f0189u3heiuyr0876098647-12984jm-9586b981nyh-983em8ut98oyuo2iy-9438567-8u3jr0-u123-171430957-09jfhn1-098347hn-561g9037yureiokh3t-189634-598ygn198364hn-51g\n");
-    }
-    return 0;
-}
+bits/stdc++.h is a banned library
