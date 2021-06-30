@@ -10,7 +10,7 @@ module.exports = {
 async function checkResult(sourceCode,input,output) {
     var resultTest = '';
     var index = 0;
-    var status =2;
+    var status = 2;
     //console.log(testDummy);
     // console.log(testDummy.sourceCode);
     return new Promise(async function (resolve, reject) {
@@ -31,7 +31,7 @@ async function checkResult(sourceCode,input,output) {
                     });
                     return;
                 }
-                console.log(filePathCpp);
+                //console.log(filePathCpp);
                 await build(filePathCpp, async function (err, filePathExe) {
                     if (err) {
                         console.log(err.message + " go build failed");
@@ -65,6 +65,7 @@ async function checkResult(sourceCode,input,output) {
                         } else {
                             if (inputMap[index].result == 'Timeout') resultTest += 'T',status=1
                             else if(inputMap[index].result == 'Out_of_buffer') resultTest += 'O',status = 1;
+                            else if(inputMap[index].result == 'runtime_error') resultTest += 'X', status= 1;
                             else resultTest += '-',status = 1
                         }
                         index++;

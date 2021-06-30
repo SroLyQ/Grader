@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node serverGrader.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js"
   },
   "repository": {
     "type": "git",
@@ -21,8 +21,12 @@
   },
   "homepage": "https://github.com/SroLyQ/Grader#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.12.13"
-  }
+    "mongoose": "^5.12.13",
+    "node-fetch": "^2.6.1",
+    "tress": "^1.1.4"
+  },
+  "proxy": "http://localhost:3400"
 }

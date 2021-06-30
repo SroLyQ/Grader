@@ -1,7 +1,8 @@
+
+const axios = require('axios')
 const {
     checkResult
 } = require('./run.js');
-
 var code1 = `
 #include<iostream>
 using namespace std;
@@ -116,13 +117,34 @@ var testDummy6 = {
     sourceCode:code6
 }
 async function tester() {
-    
-    // console.log(await checkResult(testDummy1));
-    //console.log(await checkResult(testDummy2));
-    //console.log(await checkResult(testDummy3));
-    //console.log(await checkResult(testDummy4));
-    //console.log(await checkResult(testDummy5));
-    //console.log(await checkResult(testDummy6));
-    //console.log(await checkResult(testDummy6))
+    var i;
+    const body = {
+        code:`#include <stdio.h>
+        int main(){
+            int a;
+            scanf("%d",&a);
+            printf("%d\\n",a);
+            return 0;
+        }`,
+        input : `1$.$2$.$3$.$2$.$3$.$2$.$3$.$2$.$3`,
+        output : `1$.$2$.$3$.$2$.$3$.$2$.$3$.$2$.$3`,
+        userId : `60ce02cdf95da466b8ac77f8`,
+        questionId : `60d95503d8ac664aec4a6447`
+    }
+    for(i=0;i<20;i++){
+        //console.log(body.code);
+        axios.post('http://localhost:3400/check_result',{
+            code : body.code,
+            input : body.input,
+            output : body.output,
+            userId : body.userId,
+            questionId : body.questionId
+        })
+        .then((response) => {
+            console.log(response.data);
+        },(error) =>{
+            console.log(error);
+        });
+    }
 }
 tester();

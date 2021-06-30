@@ -53,6 +53,12 @@ async function run(filePathExe, input) {
                             result
                         })
                     }
+                    else {
+                        result = 'runtime_error';
+                        resolve({
+                            result
+                        })
+                    }
                 }
                 else if (stderr) {
                     console.log(stderr);
@@ -74,9 +80,14 @@ async function run(filePathExe, input) {
                 child.stdin.setEncoding('utf-8');
                 child.stdin.write(input);
                 child.stdin.end();
-                child.on('close',(code)=>{
-                    console.log(`child process exited with code ${code}`)
+                child.stdout.on('error',(err)=>{
+                    if(err.code == 'EPIPE'){
+                        child.exit(0);
+                    }
                 })
+                // child.on('close',(code)=>{
+                //     //console.log(`child process exited with code ${code}`)
+                // })
         }
         catch (e) {
             console.log(e);
