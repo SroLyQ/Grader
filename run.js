@@ -48,6 +48,9 @@ async function checkResult(sourceCode,input,output) {
                     }
                     //console.log(filePathExe);
                     console.log("Build Complete");
+                    if(input == null){
+                        input='$.$';
+                    }
                     let runInput = input.split('$.$');
                     let runOutput = output.split('$.$');
                     var inputMap = [];
