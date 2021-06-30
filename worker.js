@@ -13,8 +13,9 @@ var check_queue = tress(function(body,next){
     console.log("checking");
 },1)
 module.exports = {
-  process_to_grader,
+  //process_to_grader,
   add_request_to_queue,
+  add_check_request_to_queue
 };
 // async function process_to_grader(req, res) {
 //   if (!req.body) {
