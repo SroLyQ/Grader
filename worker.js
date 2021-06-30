@@ -54,18 +54,17 @@ async function run_for_backend({ questionId, userId, code, input, output, rank }
     rank: rank
   };
   console.log(body);
-  // //axios.post('http://localhost:3400/checky',body)
+  //axios.post('http://localhost:3400/checky',body)
   // .then((response)=>{
   //     console.log(response.data)
   // });
-    const res = await fetch("https://api.ceboostup.com/api/submit", {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: { "Content-type": "application/json" },
-    });
-    const a = await res.text();
-
-    console.log(a);
+  const res = await fetch('https://api.ceboostup.com/api/submit', {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: { "Content-type": "application/json" },
+  });
+  const a = await res.json();
+  console.log(a);
 }
 async function check_for_backend({ questionId, code, input, output, oldstatus}) {
   const result_after_check = await checkResult(code, input, output);
@@ -75,7 +74,7 @@ async function check_for_backend({ questionId, code, input, output, oldstatus}) 
   };
   console.log(body);
   if(oldstatus == 1){
-    const res = await fetch("https://api.ceboostup.com/api/question-recheck", {
+    const res = await fetch('https://api.ceboostup.com/api/question-recheck', {
       method: "PUT",
       body: JSON.stringify(body),
       headers: { "Content-type": "application/json" },
@@ -84,7 +83,7 @@ async function check_for_backend({ questionId, code, input, output, oldstatus}) 
     console.log(b);
   }
   else if(oldstatus == 0){
-    const res = await fetch("https://api.ceboostup.com/api/question-check", {
+    const res = await fetch('https://api.ceboostup.com/api/question-check', {
       method: "POST",
       body: JSON.stringify(body),
       headers: { "Content-type": "application/json" },
