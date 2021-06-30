@@ -69,17 +69,17 @@ var testDummy3 = {
 var code4 = `
 #include <stdio.h> 
 int main(){
-    char a;
-    scanf(" %c",&a);
-    printf("%c",a);
-    while(1);
+    int i;
+    for(i=1;i<11;++i){
+        printf("%d",i);
+    }
     return 0;
 }
 `
 
 var testDummy4 = {
-    input: `6$.$2$.$2$.$2$.$2$.$2$.$2$.$2$.$2$.$2`,
-    output: `6$.$2$.$2$.$2$.$2$.$2$.$2$.$2$.$2$.$2 `,
+    input: 'asdfasdasdf',
+    output: `1`,
     sourceCode: code4
 }
 
@@ -117,34 +117,35 @@ var testDummy6 = {
     sourceCode:code6
 }
 async function tester() {
-    var i;
-    const body = {
-        code:`#include <stdio.h>
-        int main(){
-            int a;
-            scanf("%d",&a);
-            printf("%d\\n",a);
-            return 0;
-        }`,
-        input : `1$.$2$.$3$.$2$.$3$.$2$.$3$.$2$.$3`,
-        output : `1$.$2$.$3$.$2$.$3$.$2$.$3$.$2$.$3`,
-        userId : `60ce02cdf95da466b8ac77f8`,
-        questionId : `60d95503d8ac664aec4a6447`
-    }
-    for(i=0;i<20;i++){
-        //console.log(body.code);
-        axios.post('http://localhost:3400/check_result',{
-            code : body.code,
-            input : body.input,
-            output : body.output,
-            userId : body.userId,
-            questionId : body.questionId
-        })
-        .then((response) => {
-            console.log(response.data);
-        },(error) =>{
-            console.log(error);
-        });
-    }
+    console.log(await checkResult(code4,testDummy4.input,testDummy4.output));
+    // var i;
+    // const body = {
+    //     code:`#include <stdio.h>
+    //     int main(){
+    //         int a;
+    //         scanf("%d",&a);
+    //         printf("%d\\n",a);
+    //         return 0;
+    //     }`,
+    //     input : `1$.$2$.$3$.$2$.$3$.$2$.$3$.$2$.$3`,
+    //     output : `1$.$2$.$3$.$2$.$3$.$2$.$3$.$2$.$3`,
+    //     userId : `60ce02cdf95da466b8ac77f8`,
+    //     questionId : `60d95503d8ac664aec4a6447`
+    // }
+    // for(i=0;i<20;i++){
+    //     //console.log(body.code);
+    //     axios.post('http://localhost:3400/check_result',{
+    //         code : body.code,
+    //         input : body.input,
+    //         output : body.output,
+    //         userId : body.userId,
+    //         questionId : body.questionId
+    //     })
+    //     .then((response) => {
+    //         console.log(response.data);
+    //     },(error) =>{
+    //         console.log(error);
+    //     });
+    // }
 }
 tester();

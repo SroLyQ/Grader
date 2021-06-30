@@ -48,14 +48,19 @@ async function checkResult(sourceCode,input,output) {
                     }
                     //console.log(filePathExe);
                     console.log("Build Complete");
-                    if(input == null){
-                        input='$.$';
-                    }
                     let runInput = input.split('$.$');
                     let runOutput = output.split('$.$');
                     var inputMap = [];
-                    //console.log(runInput);
-                    //console.log(runOutput);
+                    console.log(runInput);
+                    console.log(runOutput);
+                    if(runInput.length != runOutput.length){
+                        resultTest = 'W'
+                        resolve({
+                            resultTest,
+                            status : 1
+                        })
+                        return;
+                    }
                     const mapInput = runInput.map(async (inputX, idx) => {
                         inputMap[idx] = await run(filePathExe, inputX);
                         //console.log(inputX)
@@ -69,6 +74,7 @@ async function checkResult(sourceCode,input,output) {
                             if (inputMap[index].result == 'Timeout') resultTest += 'T',status=1
                             else if(inputMap[index].result == 'Out_of_buffer') resultTest += 'O',status = 1;
                             else if(inputMap[index].result == 'runtime_error') resultTest += 'X', status= 1;
+                            else if(inputMap[index].result == 'noneedforinput') resultTest+='N',status=1;
                             else resultTest += '-',status = 1
                         }
                         index++;

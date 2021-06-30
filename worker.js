@@ -44,6 +44,7 @@ async function add_check_request_to_queue(req, res) {
   res.send({message : 'your request have been queue'});
 }
 async function run_for_backend({ questionId, userId, code, input, output, rank }) {
+ 
   const result_after_run = await checkResult(code, input, output);
   const body = {
     questionId : questionId,
@@ -53,18 +54,19 @@ async function run_for_backend({ questionId, userId, code, input, output, rank }
     code: code,
     rank: rank
   };
-  console.log(body);
-  //axios.post('http://localhost:3400/checky',body)
-  // .then((response)=>{
-  //     console.log(response.data)
+  console.log(body)
+  axios.post('http://localhost:3400/checky',body)
+  .then((response)=>{
+      console.log(response.data)
+  }); 
+  //TODO:post result to backend
+  // const res = await fetch('https://api.ceboostup.com/api/submit', {
+  //   method: "POST",
+  //   body: JSON.stringify(body),
+  //   headers: { "Content-type": "application/json" },
   // });
-  const res = await fetch('https://api.ceboostup.com/api/submit', {
-    method: "POST",
-    body: JSON.stringify(body),
-    headers: { "Content-type": "application/json" },
-  });
-  const a = await res.json();
-  console.log(a);
+  //const a = await res.json();
+  //console.log(a);
 }
 async function check_for_backend({ questionId, code, input, output, oldstatus}) {
   const result_after_check = await checkResult(code, input, output);
