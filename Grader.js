@@ -92,6 +92,7 @@ async function run(filePathExe, input) {
       child.stdin.setEncoding("utf-8");
       child.stdin.write(input);
       child.stdin.end();
+      //!if you dont have error handler your grader will go boom
       child.stdin.on('error',(code)=>{
           console.log(`child process exited with code ${code}`)
           result = 'noneedforinput';
