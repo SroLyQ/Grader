@@ -50,15 +50,16 @@ async function run_for_backend({ questionId, userId, code}) {
     headers : {"Content-type": "application/json"}
   });
   const dummyIO = await dummy.json();
-  console.log(dummyIO);
   const result_after_run = await checkResult(code, dummyIO.input, dummyIO.output);
   const body = {
     questionId : questionId,
     userId : userId,
     result: result_after_run.resultTest,
     status: result_after_run.status,
-    code: code
-  };
+    code: code,
+    number : dummyIO.number,
+    rank : dummyIO.rank,
+  }
   // console.log(body)
   // axios.post('http://localhost:3400/checky',body)
   // .then((response)=>{
