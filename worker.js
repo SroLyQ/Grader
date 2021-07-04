@@ -56,18 +56,18 @@ async function run_for_backend({ questionId, userId, code, input, output, rank, 
     number : number
   };
   console.log(body)
-  axios.post('http://localhost:3400/checky',body)
-  .then((response)=>{
-      console.log(response.data)
-  }); 
+  // axios.post('http://localhost:3400/checky',body)
+  // .then((response)=>{
+  //     console.log(response.data)
+  // }); 
   //TODO:post result to backend
-  // const res = await fetch('https://api.ceboostup.com/api/submit', {
-  //   method: "POST",
-  //   body: JSON.stringify(body),
-  //   headers: { "Content-type": "application/json" },
-  // });
-  //const a = await res.json();
-  //console.log(a);
+  const res = await fetch('https://api.ceboostup.com/api/submit', {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: { "Content-type": "application/json" },
+  });
+  const a = await res.json();
+  console.log(a);
 }
 async function check_for_backend({ questionId, code, input, output, oldstatus}) {
   const result_after_check = await checkResult(code, input, output);

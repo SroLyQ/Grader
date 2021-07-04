@@ -74,7 +74,7 @@ async function checkResult(sourceCode,input,output) {
                             if (inputMap[index].result == 'Timeout') resultTest += 'T',status=1
                             else if(inputMap[index].result == 'Out_of_buffer') resultTest += 'O',status = 1;
                             else if(inputMap[index].result == 'runtime_error') resultTest += 'X', status= 1;
-                            else if(inputMap[index].result == 'noneedforinput') resultTest+='N',status=1;
+                            else if(inputMap[index].result == 'noneedforinput') resultTest+='-',status=1;
                             else resultTest += '-',status = 1
                         }
                         index++;

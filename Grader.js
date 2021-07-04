@@ -48,7 +48,7 @@ async function run(filePathExe, input) {
     try {
       var child = await execFile(
         filePathExe,
-        { timeout: 1000, maxBuffer: 64 * 64 },
+        { timeout: 1000, maxBuffer: 1024 * 1024 },
         (err, stdout, stderr) => {
           if (err) {
             console.log(err);
