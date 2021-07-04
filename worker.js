@@ -94,5 +94,4 @@ async function check_for_backend({ questionId, code, input, output, oldstatus}) 
     const c = await res.text();
     console.log(c);
   }
-
 }
