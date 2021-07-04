@@ -3,7 +3,7 @@
 
 P : pass
 
--- : not pass
+- : not pass
 
 T : time out
 
