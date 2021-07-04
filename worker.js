@@ -45,9 +45,8 @@ async function add_check_request_to_queue(req, res) {
 }
 async function run_for_backend({ questionId, userId, code}) {
   
-  const dummy = await fetch('https://api.ceboostup.com/api/grader-question',{
+  const dummy = await fetch(`https://api.ceboostup.com/api/grader-question/${questionId}`,{
     method : "GET",
-    body: JSON.stringify({questionId : questionId}),
     headers : {"Content-type": "application/json"}
   });
   const result_after_run = await checkResult(code, dummy.input, dummy.output);
