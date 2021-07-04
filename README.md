@@ -5,7 +5,7 @@ P : pass
 
 -- : not pass
 
-T : time out
+T : timed out
 
 O : out of buffer
 
