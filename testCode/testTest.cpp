@@ -2,7 +2,6 @@
 #include "banned.h" 
 
 int main(){
-     int i;   
-printf("123");
+        printf("Is P\'Focus \"Handsome\"\?\nYes : 99.99%%\nYes, but it\'s the 2nd line : 0.01%%");
         return 0;
 }

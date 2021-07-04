@@ -43,19 +43,22 @@ async function add_check_request_to_queue(req, res) {
   check_queue.push(req.body);
   res.send({message : 'your request have been queue'});
 }
-async function run_for_backend({ questionId, userId, code, input, output, rank, number }) {
- 
-  const result_after_run = await checkResult(code, input, output);
+async function run_for_backend({ questionId, userId, code}) {
+  
+  const dummy = await fetch('https://api.ceboostup.com/api/grader-question',{
+    method : "GET",
+    body: JSON.stringify({questionId : questionId}),
+    headers : {"Content-type": "application/json"}
+  });
+  const result_after_run = await checkResult(code, dummy.input, dummy.output);
   const body = {
     questionId : questionId,
     userId : userId,
     result: result_after_run.resultTest,
     status: result_after_run.status,
-    code: code,
-    rank: rank,
-    number : number
+    code: code
   };
-  console.log(body)
+  // console.log(body)
   // axios.post('http://localhost:3400/checky',body)
   // .then((response)=>{
   //     console.log(response.data)
