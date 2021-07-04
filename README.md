@@ -1,4 +1,4 @@
-# Grader
+# Grader CEBU9
 # possible result
 
 P : pass
@@ -22,3 +22,30 @@ L : library is banned
 F : function in banned
 
 Y : grader error (contact admin)
+
+# BANNED FUNCTION ⛔💀
+
+- system
+- sort
+- fopen
+- fclose
+- fread
+- fwrite
+- fdopen
+- fprintf
+- gets
+- qsort
+- kill
+- atexit
+- stable_sort
+- partial_sort
+- search
+- search_n
+- reverse
+- reverse_copy
+- max
+- min
+- next_permutation
+- swap
+- fmax
+- fmin
