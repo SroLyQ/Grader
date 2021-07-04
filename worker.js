@@ -49,7 +49,7 @@ async function run_for_backend({ questionId, userId, code}) {
     method : "GET",
     headers : {"Content-type": "application/json"}
   });
-  const dummyIO = dummy.json();
+  const dummyIO = await dummy.json();
   console.log(dummyIO);
   const result_after_run = await checkResult(code, dummyIO.input, dummyIO.output);
   const body = {
