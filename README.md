@@ -3,7 +3,7 @@
 
 P : pass
 
-- : not pass
+&ndash : not pass
 
 T : time out
 
