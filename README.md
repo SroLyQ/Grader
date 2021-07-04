@@ -49,3 +49,28 @@ Y : grader error (contact admin)
 - swap
 - fmax
 - fmin
+
+# BANNED LIBRARY ⛔💀
+
+- bits/stdc++.h
+- algorithm
+- map
+- queue
+- stack
+- set
+- list
+- bitset
+- utility
+- deque
+- forward_list
+- unordered_map
+- unordered_set
+- stdatomic
+- thread
+- fstream
+- atomic
+- mutex
+- unistd.h
+- signal.h
+- windows.h
+- stdlib.h
