@@ -1,7 +1,14 @@
-#include<stdio.h>
-#include "banned.h" 
 
+#include <stdio.h>
+#include "banned.h" 
+ 
 int main(){
-        printf("Is P\'Focus \"Handsome\"\?\nYes : 99.99%%\nYes, but it\'s the 2nd line : 0.01%%");
-        return 0;
+    int i;
+    for(i=1;i<11;++i){
+        printf("%d",i);
+        if(i==2){
+            return 0;
+        }
+    }
+    return 0;
 }

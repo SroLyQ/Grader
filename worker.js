@@ -13,38 +13,23 @@ var check_queue = tress(function(body,next){
     console.log("checking");
 },1)
 module.exports = {
-  //process_to_grader,
   add_request_to_queue,
   add_check_request_to_queue
 };
-// async function process_to_grader(req, res) {
-//   if (!req.body) {
-//     return res.json({ problem: "json_incomplete" });
-//   }
-//   console.log(req.body);
-//   const resultAfterCompile = await checkResult(
-//     req.body.code,
-//     req.body.input,
-//     req.body.output
-//   );
-//   const result_toback = {
-//     questionId: req.body.questionId,
-//     userId: req.body.userId,
-//     status: resultAfterCompile.status,
-//     result: resultAfterCompile.resultTest,
-//   };
-//   return res.send(result_toback);
-// }
 async function add_request_to_queue(req, res) {
-  process_queue.push(req.body);
-  res.send({message : 'your request have been queue'});
+  try{
+    process_queue.push(req.body);
+    res.send({message : 'your request have been queue'});
+  }
+  catch(e){
+    res.send({problem : 'error sending request'});
+  }
 }
 async function add_check_request_to_queue(req, res) {
   check_queue.push(req.body);
   res.send({message : 'your request have been queue'});
 }
 async function run_for_backend({ questionId, userId, code}) {
-  
   const dummy = await fetch(`https://api.ceboostup.com/api/grader-question/${questionId}`,{
     method : "GET",
     headers : {"Content-type": "application/json"}
@@ -60,12 +45,6 @@ async function run_for_backend({ questionId, userId, code}) {
     number : dummyIO.number,
     rank : dummyIO.rank,
   }
-  // console.log(body)
-  // axios.post('http://localhost:3400/checky',body)
-  // .then((response)=>{
-  //     console.log(response.data)
-  // }); 
-  //TODO:post result to backend
   const res = await fetch('https://api.ceboostup.com/api/submit', {
     method: "POST",
     body: JSON.stringify(body),
@@ -73,6 +52,12 @@ async function run_for_backend({ questionId, userId, code}) {
   });
   const a = await res.json();
   console.log(a);
+  // console.log(body)
+  // axios.post('http://localhost:3400/checky',body)
+  // .then((response)=>{
+  //     console.log(response.data)
+  // }); 
+  //TODO:post result to backend
 }
 async function check_for_backend({ questionId, code, input, output, oldstatus}) {
   const result_after_check = await checkResult(code, input, output);
