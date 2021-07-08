@@ -30,6 +30,7 @@ async function add_check_request_to_queue(req, res) {
   res.send({message : 'your request have been queue'});
 }
 async function run_for_backend({ questionId, userId, code}) {
+  try{
   const dummy = await fetch(`https://api.ceboostup.com/api/grader-question/${questionId}`,{
     method : "GET",
     headers : {"Content-type": "application/json"}
@@ -52,6 +53,10 @@ async function run_for_backend({ questionId, userId, code}) {
   });
   const a = await res.json();
   console.log(a);
+  }
+  catch(e){
+    console.log(e.message);
+  }
   // console.log(body)
   // axios.post('http://localhost:3400/checky',body)
   // .then((response)=>{
