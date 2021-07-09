@@ -5,10 +5,10 @@ const {
 } = require('./run.js');
 var code1 = `
 #include<iostream>
-#include "math.h"
 using namespace std;
 int main() {
     string input;
+    int list[10];
     cin >> input;
     cout << input;
     return 0;
@@ -68,8 +68,9 @@ var testDummy3 = {
 }
 //timeout testDummy
 var code4 = `
-#include "stdio.h"
+#include <string.h>
 #include "math.h"
+#include <stdio.h>
 int main(){
     int i;
     for(i=1;i<11;++i){
@@ -83,7 +84,7 @@ int main(){
 `
 
 var testDummy4 = {
-    input: 'asdfasdasdf',
+    input: '',
     output: `1`,
     sourceCode: code4
 }
