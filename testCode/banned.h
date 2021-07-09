@@ -25,9 +25,6 @@
 #undef fdopen
 #define fdopen(...) BANNED(fdopen)
 
-#undef fprintf
-#define fprintf(...) BANNED(fprintf)
-
 #undef gets
 #define gets(...) BANNED(gets)
 
@@ -75,4 +72,7 @@
 
 #undef fmin
 #define fmin(...) BANNED(fmin)
+
+#undef fprintf
+#define fprintf(...) BANNED(fprintf)
 #endif

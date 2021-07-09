@@ -67,7 +67,7 @@ var testDummy3 = {
 }
 //timeout testDummy
 var code4 = `
-#include <stdio.h> 
+#include <stdio.h>
 int main(){
     int i;
     for(i=1;i<11;++i){
@@ -120,7 +120,7 @@ var testDummy6 = {
     sourceCode:code6
 }
 async function tester() {
-    console.log(await checkResult(code4,testDummy4.input,testDummy4.output));
+    console.log(await checkResult(code1,testDummy1.input,testDummy1.output));
     // var i;
     // const body = {
     //     code:`#include <stdio.h>

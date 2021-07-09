@@ -46,6 +46,7 @@ async function run_for_backend({ questionId, userId, code}) {
     number : dummyIO.number,
     rank : dummyIO.rank,
   }
+  console.log(body.result);
   const res = await fetch('https://api.ceboostup.com/api/submit', {
     method: "POST",
     body: JSON.stringify(body),

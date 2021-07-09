@@ -1,6 +1,7 @@
 const { execFile, exec } = require("child_process");
 var fs = require("fs");
 const { stdout } = require("process");
+const checkForBannedLib = require("./checkBanLib");
 
 module.exports = {
   create,
@@ -8,7 +9,6 @@ module.exports = {
   run,
   checkAnswer,
 };
-const checkForBannedLib = require("./checkBanLib");
 async function create(sourceCode, fileName, callback) {
   let checkedSource = checkForBannedLib(sourceCode);
   if (checkedSource[0] == -1) {

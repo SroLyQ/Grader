@@ -15,11 +15,12 @@ module.exports = function checkForBannedLib(sourceCode) {
         if (sourceCode.lastIndexOf(`#include`) == -1) {
             return [1, `#include\"banned.h\"\r\n` + sourceCode];
         }
-        let headerString = sourceCode.substr((sourceCode.lastIndexOf(`#include`)));
-        let intmainString= headerString.substr(headerString.indexOf(`>`) + 1);
-        //console.log(intmainString)
+        let headerString = sourceCode.substr(sourceCode.lastIndexOf(`#include`));
+        let intmainString= headerString.substr(headerString.lastIndexOf(`"\n`) + 1);
+        if(intmainString == headerString){
+            intmainString= headerString.substr(headerString.lastIndexOf(`>`) + 1);
+        }
         let newSourceCode = sourceCode.substr(0,sourceCode.lastIndexOf(intmainString))+ `\r\n#include \"banned.h\" \r\n` + intmainString
-        //console.log(newSourceCode);
         return [1, newSourceCode];
     } catch (e) {
         console.log(e);
