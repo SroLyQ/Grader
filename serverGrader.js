@@ -1,5 +1,5 @@
 const cluster = require('cluster')
-var coreTotal = require('os').cpus().length-3
+var coreTotal = require('os').cpus().length-4
 const express = require('express');
 const cors = require('cors');
 const {
