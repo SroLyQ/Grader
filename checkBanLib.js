@@ -11,7 +11,7 @@ module.exports = function checkForBannedLib(sourceCode) {
         intmainString= headerString.substr(headerString.indexOf(`>`) + 1);
     }
     header = sourceCode.substr(0,sourceCode.lastIndexOf(intmainString))
-    console.log(header);
+    //console.log(header);
     for (var lib of libBan) {
             //console.log(code.toString().includes(lib));
         if (header.toString().includes(lib)) {

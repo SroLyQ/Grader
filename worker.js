@@ -4,9 +4,14 @@ const axios = require("axios");
 const { response } = require("express");
 const fetch = require("node-fetch");
 
-var process_queue = tress(function (body, workerId, next) {
-    run_for_backend(body,workerId).then(() => next());
-    console.log("processing");
+var process_queue = tress(function (body, next) {
+    try{
+      run_for_backend(body).then(() => next());
+      console.log("processing");
+    }
+    catch(e){
+      console.log(e.message);
+    }
 }, 1);
 var check_queue = tress(function(body,next){
     check_for_backend(body).then(() => next());
@@ -16,9 +21,9 @@ module.exports = {
   add_request_to_queue,
   add_check_request_to_queue
 };
-async function add_request_to_queue(req, res, workerId) {
+async function add_request_to_queue(req, res) {
   try{
-    process_queue.push(req.body, workerId);
+    process_queue.push(req.body);
     res.send({message : 'your request have been queue'});
   }
   catch(e){
@@ -29,14 +34,14 @@ async function add_check_request_to_queue(req, res) {
   check_queue.push(req.body);
   res.send({message : 'your request have been queue'});
 }
-async function run_for_backend({ questionId, userId, code},workerId) {
+async function run_for_backend({ questionId, userId, code}) {
   try{
   const dummy = await fetch(`https://api.ceboostup.com/api/grader-question/${questionId}`,{
     method : "GET",
     headers : {"Content-type": "application/json"}
   });
   const dummyIO = await dummy.json();
-  const result_after_run = await checkResult(code, dummyIO.input, dummyIO.output, workerId);
+  const result_after_run = await checkResult(code, dummyIO.input, dummyIO.output);
   const body = {
     questionId : questionId,
     userId : userId,

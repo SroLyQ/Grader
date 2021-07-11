@@ -7,7 +7,7 @@ const {
 module.exports = {
     checkResult
 };
-async function checkResult(sourceCode,input,output, workerId) {
+async function checkResult(sourceCode,input,output) {
     var resultTest = '';
     var index = 0;
     var status = 2;
@@ -16,7 +16,7 @@ async function checkResult(sourceCode,input,output, workerId) {
     return new Promise(async function (resolve, reject) {
         try{
         await
-            create(sourceCode, `${workerId}_code`, async function (err, filePathCpp) {
+            create(sourceCode, `${process.pid}_code`, async function (err, filePathCpp) {
                 if (err) {
                     resultTest = 'C'
                     status = 1;
