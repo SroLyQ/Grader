@@ -7,7 +7,7 @@ const {
 module.exports = {
     checkResult
 };
-async function checkResult(sourceCode,input,output) {
+async function checkResult(sourceCode,input,output, workerId) {
     var resultTest = '';
     var index = 0;
     var status = 2;
@@ -16,7 +16,7 @@ async function checkResult(sourceCode,input,output) {
     return new Promise(async function (resolve, reject) {
         try{
         await
-            create(sourceCode, 'testTest', async function (err, filePathCpp) {
+            create(sourceCode, `${workerId}_code`, async function (err, filePathCpp) {
                 if (err) {
                     resultTest = 'C'
                     status = 1;
@@ -51,8 +51,8 @@ async function checkResult(sourceCode,input,output) {
                     let runInput = input.split('$.$');
                     let runOutput = output.split('$.$');
                     var inputMap = [];
-                    console.log(runInput);
-                    console.log(runOutput);
+                    //console.log(runInput);
+                    //console.log(runOutput);
                     if(runInput.length != runOutput.length){
                         resultTest = 'W'
                         resolve({

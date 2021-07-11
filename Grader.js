@@ -93,6 +93,13 @@ async function run(filePathExe, input) {
       child.stdin.write(input);
       child.stdin.end();
       //!if you dont have error handler your grader will go boom
+      child.stdin.on('error',(code)=>{
+        console.log(`child process exited with code ${code}`)
+        result = 'noneedforinput';
+        resolve({
+          result,
+        })
+      })
     } catch (e) {
       console.log(e.message);
     }
