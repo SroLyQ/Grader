@@ -63,8 +63,6 @@ async function checkResult(sourceCode,input,output) {
                     }
                     const mapInput = runInput.map(async (inputX, idx) => {
                         inputMap[idx] = await run(filePathExe, inputX);
-                        //console.log(inputX)
-                        //console.log(result_[idx].result);
                     });
                     await Promise.all(mapInput);
                     runOutput.forEach(runTest => {
@@ -79,7 +77,6 @@ async function checkResult(sourceCode,input,output) {
                         }
                         index++;
                     });
-                    // console.log(resultTest);
                     resolve({
                         resultTest,
                         status

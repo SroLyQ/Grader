@@ -13,13 +13,8 @@ var process_queue = tress(function (body, next) {
       console.log(e.message);
     }
 }, 1);
-var check_queue = tress(function(body,next){
-    check_for_backend(body).then(() => next());
-    console.log("checking");
-},1)
 module.exports = {
   add_request_to_queue,
-  add_check_request_to_queue
 };
 async function add_request_to_queue(req, res) {
   try{
@@ -29,10 +24,6 @@ async function add_request_to_queue(req, res) {
   catch(e){
     res.send({problem : 'error sending request'});
   }
-}
-async function add_check_request_to_queue(req, res) {
-  check_queue.push(req.body);
-  res.send({message : 'your request have been queue'});
 }
 async function run_for_backend({ questionId, userId, code}) {
   try{
@@ -63,36 +54,5 @@ async function run_for_backend({ questionId, userId, code}) {
   catch(e){
     console.log(e.message);
   }
-  // console.log(body)
-  // axios.post('http://localhost:3400/checky',body)
-  // .then((response)=>{
-  //     console.log(response.data)
-  // }); 
   //TODO:post result to backend
-}
-async function check_for_backend({ questionId, code, input, output, oldstatus}) {
-  const result_after_check = await checkResult(code, input, output);
-  const body = {
-    questionId : questionId,
-    status: result_after_check.status
-  };
-  console.log(body);
-  if(oldstatus == 1){
-    const res = await fetch('https://api.ceboostup.com/api/question-recheck', {
-      method: "PUT",
-      body: JSON.stringify(body),
-      headers: { "Content-type": "application/json" },
-    });
-    const b = await res.text();
-    console.log(b);
-  }
-  else if(oldstatus == 0){
-    const res = await fetch('https://api.ceboostup.com/api/question-check', {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: { "Content-type": "application/json" },
-    });
-    const c = await res.text();
-    console.log(c);
-  }
 }
