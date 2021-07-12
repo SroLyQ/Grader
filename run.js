@@ -20,7 +20,7 @@ async function checkResult(sourceCode,input,output) {
                 if (err) {
                     resultTest = 'C'
                     status = 1;
-                    console.log(err + " go create failed");
+                    //console.log(err + " go create failed");
                     if(err.toString().includes(`is a banned library`)){
                         resultTest='L'
                     }
