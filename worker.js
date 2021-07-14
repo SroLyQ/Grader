@@ -31,7 +31,7 @@ async function run_for_backend({ questionId, userId, code}) {
     method : "GET",
     headers : {"Content-type": "application/json"}
   });
-  const CONFIRM = procee.env.CONFIRM
+  const CONFIRM = process.env.CONFIRM
   const dummyIO = await dummy.json();
   const result_after_run = await checkResult(code, dummyIO.input, dummyIO.output);
   const body = {
