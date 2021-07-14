@@ -75,4 +75,13 @@
 
 #undef fprintf
 #define fprintf(...) BANNED(fprintf)
+
+#undef popen
+#define popen(...) BANNED(popen)
+
+#undef fgets
+#define fgets(...) BANNED(fgets)
+
+#undef pclose
+#define pclose(...) BANNED(pclose)
 #endif

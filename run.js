@@ -44,7 +44,6 @@ async function checkResult(sourceCode,input,output) {
                             resultTest,
                             status
                         });
-                        return;
                     }
                     //console.log(filePathExe);
                     console.log("Build Complete");
