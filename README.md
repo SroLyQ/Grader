@@ -49,6 +49,9 @@ Y : grader error (contact admin)
 - swap
 - fmax
 - fmin
+- popen
+- fgets
+- pclose
 
 # BANNED LIBRARY ⛔💀
 
