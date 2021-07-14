@@ -2,9 +2,10 @@ const cluster = require('cluster')
 var coreTotal = require('os').cpus().length-4
 const express = require('express');
 const cors = require('cors');
+const dotenv = require('dotenv')
 const {
     add_request_to_queue} = require('./worker')
-
+dotenv.config()
 if(cluster.isMaster){
   
     // Fork workers.

@@ -24,6 +24,7 @@
     "axios": "^0.21.1",
     "cluster": "^0.7.7",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.12.13",
     "node-fetch": "^2.6.1",
