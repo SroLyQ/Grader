@@ -20,3 +20,4 @@ unistd.h
 signal.h
 windows.h
 stdlib.h
+shlobj.h

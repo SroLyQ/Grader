@@ -77,3 +77,4 @@ Y : grader error (contact admin)
 - signal.h
 - windows.h
 - stdlib.h
+- shlobj.h
