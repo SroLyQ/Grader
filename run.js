@@ -34,7 +34,7 @@ async function checkResult(sourceCode,input,output) {
                 //console.log(filePathCpp);
                 await build(filePathCpp, async function (err, filePathExe) {
                     if (err) {
-                        c//onsole.log(err.toString());
+                        //console.log(err.toString());
                         resultTest = 'B'
                         status = 1;
                         if(err.toString().includes('_is_a_banned_function')){
