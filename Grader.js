@@ -51,7 +51,7 @@ async function run(filePathExe, input) {
         { timeout: 1000, maxBuffer: 1024 * 1024 },
         (err, stdout, stderr) => {
           if (err) {
-            console.log(err);
+            //console.log(err.code + " run failed");
             if (err.signal && err.signal == "SIGTERM") {
               result = "Timeout";
               resolve({
@@ -72,13 +72,13 @@ async function run(filePathExe, input) {
               });
             }
           } else if (stderr) {
-            console.log(stderr);
+            //console.log(stderr);
             result = "failed";
             resolve({
               result,
             });
           } else {
-            console.log(stdout);
+            //console.log(stdout);
             result = stdout;
             resolve({
               result,
