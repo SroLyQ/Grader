@@ -14,7 +14,7 @@ var process_queue = tress(function (body, next) {
     }
 }, 1);
 module.exports = {
-  add_request_to_queue,
+  add_request_to_queue,test
 };
 async function add_request_to_queue(req, res) {
   try{
@@ -24,6 +24,10 @@ async function add_request_to_queue(req, res) {
   catch(e){
     res.send({problem : 'error sending request'});
   }
+}
+async function test(req,res){
+    let a = await checkResult(req.code);
+    res.send(a);
 }
 async function run_for_backend({ questionId, userId, code}) {
   try{

@@ -1,3 +1,4 @@
+#undef BANNED_H
 #ifndef BANNED_H
 #define BANNED_H
 

@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv')
 const {
-    add_request_to_queue} = require('./worker')
+    add_request_to_queue,test} = require('./worker')
 dotenv.config()
 if(cluster.isMaster){
   
