@@ -1,4 +1,3 @@
-#undef BANNED_H
 #ifndef BANNED_H
 #define BANNED_H
 
@@ -68,11 +67,11 @@
 #undef swap
 #define swap(...) BANNED(swap)
 
-// #undef fmax
-// #define fmax(...) BANNED(fmax)
+#undef fmax
+#define fmax(...) BANNED(fmax)
 
-// #undef fmin
-// #define fmin(...) BANNED(fmin)
+#undef fmin
+#define fmin(...) BANNED(fmin)
 
 #undef fprintf
 #define fprintf(...) BANNED(fprintf)

@@ -15,19 +15,23 @@ module.exports = function checkForBannedLib(sourceCode) {
         if (sourceCode.lastIndexOf(`#include`) == -1) {
             return [1, `#include\"banned.h\"\r\n` + sourceCode];
         }
-        includeTable = sourceCode.toString().split(/\r?\n/);
-        for(var include of includeTable){
-            if(include.toString().includes(`#include`)){
-                //console.log(include)
-                include+=`\r\n#include\"banned.h\"\r\n`
-            }
-            else{
-                include+=`\r\n`
-            }
-            newSourceCode += include;
-        }
-        console.log(newSourceCode);
-        return [1, newSourceCode];
+        // includeTable = sourceCode.toString().split(/\r?\n/);
+        // for(var include of includeTable){
+        //     if(include.toString().includes(`#include`)){
+        //         //console.log(include)
+        //         include+=`\r\n#include\"banned.h\"\r\n`
+        //     }
+        //     else{
+        //         include+=`\r\n`
+        //     }
+        //     newSourceCode += include;
+        // }
+    let newString = sourceCode.substr(sourceCode.lastIndexOf(`#include`));
+    let newString2 = newString.substr(newString.indexOf(`>`) + 1);
+
+    newSourceCode=sourceCode.substr(0, sourceCode.indexOf(newString2)) + `\r\n#include\"banned.h\"\r\n` + newString2;
+    console.log(newSourceCode);
+    return [1, newSourceCode];
     } catch (e) {
         console.log(e);
         return [1, `#include\"banned.h\"\r\n` + sourceCode];
