@@ -18,7 +18,7 @@ module.exports = function checkForBannedLib(sourceCode) {
         includeTable = sourceCode.toString().split(/\r?\n/);
         for(var include of includeTable){
             if(include.toString().includes(`#include`)){
-                console.log(include)
+                //console.log(include)
                 include+=`\r\n#include\"banned.h\"\r\n`
             }
             else{
