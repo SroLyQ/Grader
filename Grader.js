@@ -106,9 +106,11 @@ async function run(filePathExe, input) {
   });
 }
 function checkAnswer(sourceOutput, testCaseOutput) {
+  try{
   var trimedSourceOutput = sourceOutput.trimEnd().split(/\r?\n/);
   var trimedTestCaseOutput = testCaseOutput.trimEnd().split(/\r?\n/);
   for (var index = 0; index < trimedSourceOutput.length; index++) {
+    console.log(trimedTestCaseOutput[index]);
     if (
       trimedSourceOutput[index].trimEnd() !=
       trimedTestCaseOutput[index].trimEnd()
@@ -117,4 +119,7 @@ function checkAnswer(sourceOutput, testCaseOutput) {
     }
   }
   return true;
+  }catch(e){
+    return false;
+  }
 }

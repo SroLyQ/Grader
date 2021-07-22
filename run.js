@@ -50,8 +50,8 @@ async function checkResult(sourceCode,input,output) {
                     let runInput = input.split('$.$');
                     let runOutput = output.split('$.$');
                     var inputMap = [];
-                    console.log(runInput);
-                    console.log(runOutput);
+                    //console.log(runInput);
+                    //console.log(runOutput);
                     if(runInput.length != runOutput.length){
                         resultTest = 'W'
                         resolve({
@@ -65,9 +65,6 @@ async function checkResult(sourceCode,input,output) {
                     });
                     await Promise.all(mapInput);
                     runOutput.forEach(runTest => {
-                        console.log(inputMap[index].result);
-                        console.log('---------------------')
-                        console.log(runTest)
                         if (checkAnswer(inputMap[index].result, runTest)) {
                             resultTest += 'P'
                         } else {
