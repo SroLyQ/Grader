@@ -107,6 +107,7 @@ async function run(filePathExe, input) {
 }
 function checkAnswer(sourceOutput, testCaseOutput) {
   var trimedSourceOutput = sourceOutput.trimEnd().split(/\r?\n/);
+  console.log(testCaseOutput);
   var trimedTestCaseOutput = testCaseOutput.trimEnd().split(/\r?\n/);
   for (var index = 0; index < trimedSourceOutput.length; index++) {
     if (
