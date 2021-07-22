@@ -1,5 +1,6 @@
 const { execFile, exec } = require("child_process");
 var fs = require("fs");
+const { connect } = require("http2");
 const { stdout } = require("process");
 const checkForBannedLib = require("./checkBanLib");
 
@@ -109,17 +110,14 @@ function checkAnswer(sourceOutput, testCaseOutput) {
   try{
   var trimedSourceOutput = sourceOutput.trimEnd().split(/\r?\n/);
   var trimedTestCaseOutput = testCaseOutput.trimEnd().split(/\r?\n/);
-  for (var index = 0; index < trimedSourceOutput.length; index++) {
-    console.log(trimedTestCaseOutput[index]);
-    if (
-      trimedSourceOutput[index].trimEnd() !=
-      trimedTestCaseOutput[index].trimEnd()
-    ) {
+  for (var index = 0; index < trimedTestCaseOutput.length; index++) {
+    if (trimedSourceOutput[index].trimEnd() !=trimedTestCaseOutput[index].trimEnd()) {
       return false;
     }
   }
   return true;
   }catch(e){
+    console.log(e.message)
     return false;
   }
 }

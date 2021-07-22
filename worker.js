@@ -51,7 +51,7 @@ async function run_for_backend({ questionId, userId, code}) {
     headers: { "Content-type": "application/json" },
   });
   const a = await res.json();
-  console.log(a);
+  //console.log(a);
   }
   catch(e){
     console.log(e.message);

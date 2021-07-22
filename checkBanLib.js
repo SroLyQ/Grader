@@ -30,7 +30,7 @@ module.exports = function checkForBannedLib(sourceCode) {
     let newString2 = newString.substr(newString.indexOf(`>`) + 1);
 
     newSourceCode=sourceCode.substr(0, sourceCode.indexOf(newString2)) + `\r\n#include\"banned.h\"\r\n` + newString2;
-    console.log(newSourceCode);
+    //console.log(newSourceCode);
     return [1, newSourceCode];
     } catch (e) {
         console.log(e);
