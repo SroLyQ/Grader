@@ -67,7 +67,7 @@ async function checkResult(sourceCode,input,output) {
                     runOutput.forEach(runTest => {
                         console.log(inputMap[index].result);
                         console.log('---------------------')
-                        console.log(runtest)
+                        console.log(runTest)
                         if (checkAnswer(inputMap[index].result, runTest)) {
                             resultTest += 'P'
                         } else {
