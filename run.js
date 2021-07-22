@@ -50,8 +50,8 @@ async function checkResult(sourceCode,input,output) {
                     let runInput = input.split('$.$');
                     let runOutput = output.split('$.$');
                     var inputMap = [];
-                    //console.log(runInput);
-                    //console.log(runOutput);
+                    console.log(runInput);
+                    console.log(runOutput);
                     if(runInput.length != runOutput.length){
                         resultTest = 'W'
                         resolve({
