@@ -65,6 +65,9 @@ async function checkResult(sourceCode,input,output) {
                     });
                     await Promise.all(mapInput);
                     runOutput.forEach(runTest => {
+                        console.log(inputMap[index].result);
+                        console.log('---------------------')
+                        console.log(runtest)
                         if (checkAnswer(inputMap[index].result, runTest)) {
                             resultTest += 'P'
                         } else {
